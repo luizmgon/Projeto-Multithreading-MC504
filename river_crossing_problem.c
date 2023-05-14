@@ -6,8 +6,8 @@
 #include <math.h>
 
 
-#define N_hackers 10
-#define N_serfs 12
+#define N_hackers 20
+#define N_serfs 20
 
 pthread_barrier_t barrier;
 pthread_barrierattr_t attr;
@@ -38,18 +38,16 @@ void *thread_serfs(){
     printf("Chegou um microsofter\n\n");
 
     if (serfs == 4){
-        sem_post(&serf_queue);
-        sem_post(&serf_queue);
-        sem_post(&serf_queue);
-        sem_post(&serf_queue);
+        for (int i = 0; i < 4; i ++)
+            sem_post(&serf_queue);
         serfs = 0;
         is_captain = 1;
     }
     else if ((serfs == 2) && (hackers >= 2)){
-        sem_post(&serf_queue);
-        sem_post(&serf_queue);
-        sem_post(&hacker_queue);
-        sem_post(&hacker_queue);
+        for (int i = 0; i < 2; i ++){
+            sem_post(&serf_queue);
+            sem_post(&hacker_queue);
+        }
         hackers -= 2;
         serfs = 0;
         is_captain = 1;
@@ -77,18 +75,16 @@ void *thread_hackers(){
     printf("Chegou um hacker\n\n");
 
     if (hackers == 4){
-        sem_post(&hacker_queue);
-        sem_post(&hacker_queue);
-        sem_post(&hacker_queue);
-        sem_post(&hacker_queue);
+        for (int i = 0; i < 4; i ++)
+            sem_post(&hacker_queue);
         hackers = 0;
         is_captain = 1;
     }
     else if ((hackers == 2) && (serfs >= 2)){
-        sem_post(&hacker_queue);
-        sem_post(&hacker_queue);
-        sem_post(&serf_queue);
-        sem_post(&serf_queue);
+        for (int i = 0; i < 2; i ++){
+            sem_post(&hacker_queue);
+            sem_post(&serf_queue);
+        }
         serfs -= 2;
         hackers = 0;
         is_captain = 1;
@@ -138,10 +134,10 @@ int main(){
                 n_serfs_left -= 2;
         }
     }
-    int maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
 
-
-    printf("%d %d %d\n", maximo, n_hackers_left, n_serfs_left);
+    int maximo;
+    maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
+    
     for (int i = 0; i < maximo; i++){
         if (i < n_hackers_left){
             // sleep(1);
@@ -162,7 +158,6 @@ int main(){
         }
     }
 
-
     for (int i = 0; i < (N_hackers - n_hackers_left); i++){
         sem_post(&hacker_queue);
         printf("Um hacker não conseguiu atravessar\n\n");
@@ -173,12 +168,5 @@ int main(){
         printf("Um microsofter não conseguiu atravessar\n\n");
     }
 
-    // for (int i = 0; i < N_serfs; i++){
-    // }
-
-    // for (int i = 0; i < N_serfs; i++){
-    // }
-
     return 0;
-
 }
