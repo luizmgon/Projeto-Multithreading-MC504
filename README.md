@@ -7,7 +7,7 @@ Este projeto tem como objetivo a criação de uma visualização gráfica de um 
 Cícero Pizzol Libardi - **RA: 168810**\
 Isabella Garcia Fagioli - **RA: 173174**\
 Jéssica da Silva de Oliveira - **RA: 173931**\
-Luiz Henrique Marques Gonçalves - **RA: 183218**\
+Luiz Henrique Marques Gonçalves - **RA: 183218**
 
 ## Descrição do Problema
 
