@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <math.h>
+#include <time.h>
 
-#define N_HACKERS 10
-#define N_SERFS 10
+#define N_HACKERS 20
+#define N_SERFS 20
 
 // Variáveis globais do problema.
 pthread_barrier_t barrier;
@@ -33,7 +34,7 @@ void board(char category)
 void rowBoat()
 {
     printf("O barco partiu\n\n");
-    usleep(1000000);
+    sleep(1);
 }
 
 // Chegada de um novo Microsofter na fila.
@@ -187,17 +188,20 @@ int main()
 
     int maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
 
+    int num;
+    int p1, p2;
     // Criação das Threads.
     for (int i = 0; i < maximo; i++)
     {
+        num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
         if (i < n_hackers_left)
         {
-            usleep(500000);
+            sleep(num);
             pthread_create(&thr_hackers[i], NULL, thread_hackers, NULL);
         }
         if (i < n_serfs_left)
         {
-            usleep(500000);
+            sleep(num);
             pthread_create(&thr_serfs[i], NULL, thread_serfs, NULL);
         }
     }
