@@ -6,7 +6,7 @@
 #include <math.h>
 #include <time.h>
 
-#define N_HACKERS 1
+#define N_HACKERS 4
 #define N_SERFS 1
 
 // Variáveis globais do problema.
@@ -204,13 +204,13 @@ int main()
         if (prob < 0.5){ 
             if (j < n_hackers_left){
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                sleep(num);
                 pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
                 j++;
             }
             else{
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                sleep(num);
                 pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
                 k++;
             }
@@ -218,13 +218,13 @@ int main()
         else{
             if (k < n_serfs_left){
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                sleep(num);
                 pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
                 k++;
             }
             else{
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                sleep(num);
                 pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
                 j++;
             }
