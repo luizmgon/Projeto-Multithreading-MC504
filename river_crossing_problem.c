@@ -6,8 +6,8 @@
 #include <math.h>
 #include <time.h>
 
-#define N_HACKERS 20
-#define N_SERFS 20
+#define N_HACKERS 10
+#define N_SERFS 10
 
 // Variáveis globais do problema.
 pthread_barrier_t barrier;
@@ -33,6 +33,7 @@ void board(char category)
 // Ação de partida do barco.
 void rowBoat()
 {
+    sleep(1);
     printf("O barco partiu\n\n");
     sleep(1);
 }
@@ -190,22 +191,45 @@ int main()
 
     int num;
     int p1, p2;
+    double prob;
+    int j = 0, k = 0;
     // Criação das Threads.
-    for (int i = 0; i < maximo; i++)
+    prob = (double) rand() / RAND_MAX;
+    for (int i = 0; i < n_serfs_left + n_hackers_left; i++)
     {
-        num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-        if (i < n_hackers_left)
-        {
-            sleep(num);
-            pthread_create(&thr_hackers[i], NULL, thread_hackers, NULL);
+        prob = (double) rand() / RAND_MAX; // Gera um número aleatório entre 0 e 1
+
+        if (prob < 0.5){ 
+            if (j < n_hackers_left){
+                num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
+                sleep(num);
+                pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
+                j++;
+            }
+            else{
+                num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
+                sleep(num);
+                pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
+                k++;
+            }
         }
-        if (i < n_serfs_left)
-        {
-            sleep(num);
-            pthread_create(&thr_serfs[i], NULL, thread_serfs, NULL);
+        else{
+            if (k < n_serfs_left){
+                num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
+                sleep(num);
+                pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
+                k++;
+            }
+            else{
+                num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
+                sleep(num);
+                pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
+                j++;
+            }
         }
     }
 
+    sleep(5);
     // Espera de finalização das Threads.
     for (int i = 0; i < maximo; i++)
     {
