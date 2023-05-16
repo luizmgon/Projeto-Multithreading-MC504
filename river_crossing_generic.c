@@ -7,8 +7,8 @@
 #include <time.h>
 
 #define N_HACKERS 32
-#define N_SERFS 16
-#define N_VAGAS 4
+#define N_SERFS 50
+#define N_VAGAS 20
 #define PORCENTAGEM_MINIMA 0.25
 
 // Variáveis globais do problema.
@@ -30,6 +30,9 @@ void board(char category)
     {
         printf("-----------Embarcou um hacker-----------------\n\n");
     }
+
+    usleep(500000);
+
 }
 
 // Ação de partida do barco.
@@ -37,7 +40,7 @@ void rowBoat()
 {
     //sleep(1);
     printf("O barco partiu\n\n");
-    //sleep(1);
+    sleep(1);
 }
 
 // Chegada de um novo Microsofter na fila.
@@ -45,6 +48,7 @@ void newSerfArrived()
 {
     serfs += 1;
     printf("Chegou um microsofter\n\n");
+    usleep(500000);
 }
 
 // Chegada de um novo Hacker na fila.
@@ -52,6 +56,7 @@ void newHackerArrived()
 {
     hackers += 1;
     printf("Chegou um hacker\n\n");
+    usleep(500000);
 }
 
 // Thread de comportamento dos Microsofters.
