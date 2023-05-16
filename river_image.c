@@ -72,11 +72,13 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i;i<nserfs;i++){
         if(i==0){
             printf("  -|-"); 
+            espac_corpinho = espac_corpinho - 5;
         }
         else{
             printf(" -|-"); 
+            espac_corpinho = espac_corpinho - 4;
         }
-        espac_corpinho = espac_corpinho - 5;
+        
     }
     for(int i=0;i<espac_corpinho;i++){
         printf(" ");
@@ -91,11 +93,12 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i;i<nserfs;i++){
         if(i==0){
             printf("  / \\"); 
+            espac_pernas = espac_pernas - 5;
         }
         else{
             printf(" / \\"); 
+            espac_pernas = espac_pernas - 4;
         }
-        espac_pernas = espac_pernas - 5;
     }
     for(int i=0;i<espac_pernas;i++){
         printf(" ");
@@ -172,11 +175,12 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i;i<nhackers;i++){
         if(i==0){
             printf("  -|-"); 
+            espac_corpinho = espac_corpinho - 5;
         }
         else{
             printf(" -|-"); 
+            espac_corpinho = espac_corpinho - 4;
         }
-        espac_corpinho = espac_corpinho - 5;
     }
     for(int i=0;i<espac_corpinho;i++){
         printf(" ");
@@ -193,11 +197,12 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i;i<nhackers;i++){
         if(i==0){
             printf("  / \\"); 
+            espac_pernas = espac_pernas - 5;
         }
         else{
             printf(" / \\"); 
+            espac_pernas = espac_pernas - 4;
         }
-        espac_pernas = espac_pernas - 5;
     }
     for(int i=0;i<espac_pernas;i++){
         printf(" ");
