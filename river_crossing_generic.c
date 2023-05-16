@@ -203,7 +203,7 @@ int main()
     int maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
 
     int num;
-    int p1, p2;
+    //int p1, p2;
     double prob;
     int j = 0, k = 0;
     // Criação das Threads.
