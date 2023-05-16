@@ -15,6 +15,7 @@
 // Variáveis globais do problema.
 pthread_barrier_t barrier;
 sem_t mutex;
+sem_t show;
 sem_t serf_queue;
 sem_t hacker_queue;
 int hackers = 0;
@@ -48,7 +49,9 @@ void rowBoat()
 void newSerfArrived()
 {
     serfs += 1;
+    sem_wait(&show);
     estado_atual_chegada(hackers, serfs);
+    sem_post(&show);
     //printf("Chegou um microsofter\n\n");
     usleep(500000);
 }
@@ -57,7 +60,9 @@ void newSerfArrived()
 void newHackerArrived()
 {
     hackers += 1;
+    sem_wait(&show);
     estado_atual_chegada(hackers, serfs);
+    sem_post(&show);
     //printf("Chegou um hacker\n\n");
     usleep(500000);
 }
@@ -158,6 +163,7 @@ int main()
     sem_init(&mutex, 0, 1);
     sem_init(&hacker_queue, 0, 0);
     sem_init(&serf_queue, 0, 0);
+    sem_init(&show, 0 , 1);
 
     // Inicialização das Threads.
     pthread_t thr_hackers[N_HACKERS];
