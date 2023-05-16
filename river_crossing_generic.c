@@ -5,10 +5,11 @@
 #include <unistd.h>
 #include <math.h>
 #include <time.h>
+#include "river_image.c"
 
-#define N_HACKERS 32
-#define N_SERFS 50
-#define N_VAGAS 20
+#define N_HACKERS 4
+#define N_SERFS 1
+#define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
 // Variáveis globais do problema.
@@ -47,7 +48,8 @@ void rowBoat()
 void newSerfArrived()
 {
     serfs += 1;
-    printf("Chegou um microsofter\n\n");
+    estado_atual_chegada(hackers, serfs);
+    //printf("Chegou um microsofter\n\n");
     usleep(500000);
 }
 
@@ -55,7 +57,8 @@ void newSerfArrived()
 void newHackerArrived()
 {
     hackers += 1;
-    printf("Chegou um hacker\n\n");
+    estado_atual_chegada(hackers, serfs);
+    //printf("Chegou um hacker\n\n");
     usleep(500000);
 }
 
