@@ -1,3 +1,4 @@
 exe
 obj
 river_image.o
+river_crossing_generic.o
