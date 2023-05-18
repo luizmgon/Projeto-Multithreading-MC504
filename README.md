@@ -23,6 +23,33 @@ Depois que todas as threads embarcarem, apenas uma delas deve chamar uma funçã
 
 Não importa a direção do barco, a preocupação é controlar o tráfico de pessoas que entra e sai dos barcos. 
 
+## Instruções de Compilação
+
+Para a representação grafica foi utilizada a biblioteca `ncurses`.
+
+É preciso configurar seu ambiente de compilação, instalando a biblioteca:
+
+```
+sudo apt-get install libncurses5-dev libncursesw5-dev
+```
+
+Você pode conferir maiores detalhes da documentação [aqui](https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/)
+
+Para compilar e executar, na raiz do projeto, faça:
+
+```
+make
+./exe
+```
+
+Caso o sistema retorne um erro de acesso não permitido, faça `chmod +rwe ./exe`
+
+## Implementação
+_explicar detalhes importantes da implementação dos semáfaros, decisões feitas, duas versões, etc_
+
 ## Representação Gráfica
 
 _completar com alguns prints e descrições da representação gráfica do problema_
+
+
+
