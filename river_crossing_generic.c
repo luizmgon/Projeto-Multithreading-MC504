@@ -27,12 +27,16 @@ void board(char category)
 {
     if (category == 's')
     {
-        printf("-----------Embarcou um microsofter--------------\n\n");
+        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        //printf("-----------Embarcou um microsofter--------------\n\n");
+        sleep(1);
         serfs_barco = serfs_barco + 1;
     }
     else
     {
-        printf("-----------Embarcou um hacker-----------------\n\n");
+        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        //printf("-----------Embarcou um hacker-----------------\n\n");
+        sleep(1);
         hackers_barco = hackers_barco + 1;
     }
 
