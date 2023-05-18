@@ -19,6 +19,8 @@ sem_t serf_queue;
 sem_t hacker_queue;
 int hackers = 0;
 int serfs = 0;
+int hackers_barco = 0;
+int serfs_barco = 0;
 
 // Ação de embarque dos personagens no barco.
 void board(char category)
@@ -26,10 +28,12 @@ void board(char category)
     if (category == 's')
     {
         printf("-----------Embarcou um microsofter--------------\n\n");
+        serfs_barco = serfs_barco + 1;
     }
     else
     {
         printf("-----------Embarcou um hacker-----------------\n\n");
+        hackers_barco = hackers_barco + 1;
     }
 
     usleep(500000);
@@ -40,7 +44,22 @@ void board(char category)
 void rowBoat()
 {
     //sleep(1);
-    printf("O barco partiu\n\n");
+    remando(hackers,serfs,hackers_barco,serfs_barco,0);
+    sleep(1);
+    remando(hackers,serfs,hackers_barco,serfs_barco,1);
+    sleep(1);
+    remando(hackers,serfs,hackers_barco,serfs_barco,2);
+    sleep(1);
+    remando(hackers,serfs,hackers_barco,serfs_barco,3);
+    sleep(1);
+    remando(hackers,serfs,0,0,3);
+    sleep(1);
+    remando(hackers,serfs,0,0,2);
+    sleep(1);
+    remando(hackers,serfs,0,0,1);
+    sleep(1);
+    remando(hackers,serfs,0,0,0);
+    //printf("O barco partiu\n\n");
     sleep(1);
 }
 
