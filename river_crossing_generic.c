@@ -8,8 +8,8 @@
 #include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 2
-#define N_SERFS 2
+#define N_HACKERS 4
+#define N_SERFS 4
 #define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
@@ -30,18 +30,18 @@ void board(char category)
     sem_wait(&show);
     if (category == 's')
     {
-        //embarca(hackers, serfs,hackers_barco, serfs_barco,0);
         clear();
-        printw("-----------Embarcou um microsofter--------------\n\n");
+        //printw("-----------Embarcou um microsofter--------------\n\n");
+        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
         refresh();
         sleep(1);
         serfs_barco = serfs_barco + 1;
     }
     else
     {
-        //embarca(hackers, serfs,hackers_barco, serfs_barco,0);
         clear();
-        printw("-----------Embarcou um hacker-----------------\n\n");
+        //printw("-----------Embarcou um hacker-----------------\n\n");
+        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
         refresh();
         sleep(1);
         hackers_barco = hackers_barco + 1;
@@ -56,26 +56,42 @@ void board(char category)
 void rowBoat()
 {
     //sleep(1);
-    /*remando(hackers,serfs,hackers_barco,serfs_barco,0);
-    sleep(1);
-    remando(hackers,serfs,hackers_barco,serfs_barco,1);
-    sleep(1);
-    remando(hackers,serfs,hackers_barco,serfs_barco,2);
-    sleep(1);
-    remando(hackers,serfs,hackers_barco,serfs_barco,3);
-    sleep(1);
-    remando(hackers,serfs,0,0,3);
-    sleep(1);
-    remando(hackers,serfs,0,0,2);
-    sleep(1);
-    remando(hackers,serfs,0,0,1);
-    sleep(1);
-    remando(hackers,serfs,0,0,0);
-    //printf("O barco partiu\n\n");*/
     clear();
-    printw("O barco partiu\n\n");
+    remando(hackers,serfs,hackers_barco,serfs_barco,0);
     refresh();
     sleep(1);
+    clear();
+    remando(hackers,serfs,hackers_barco,serfs_barco,1);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,hackers_barco,serfs_barco,2);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,hackers_barco,serfs_barco,3);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,0,0,3);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,0,0,2);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,0,0,1);
+    refresh();
+    sleep(1);
+    clear();
+    remando(hackers,serfs,0,0,0);
+    refresh();
+    //printf("O barco partiu\n\n");*/
+    //printw("O barco partiu\n\n");
+    sleep(1);
+    serfs_barco = 0;
+    hackers_barco = 0;
 }
 
 // Chegada de um novo Microsofter na fila.
@@ -97,9 +113,9 @@ void newHackerArrived()
 {
     hackers += 1;
     sem_wait(&show);
-    //estado_atual_chegada(hackers, serfs);
     clear();
-    printw("Chegou um hacker\n\n");
+    //printw("Chegou um hacker\n\n");
+    estado_atual_chegada(hackers, serfs);
     refresh();
     sem_post(&show);
     //printf("Chegou um hacker\n\n");
