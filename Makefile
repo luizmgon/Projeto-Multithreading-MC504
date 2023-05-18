@@ -7,12 +7,12 @@ CPP = gcc
 SOURCES = *generic.c
 LAB = exe
 OBJ = obj
-OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
+OBJECTS = $(patsubst %.c, %.o, $(wildcard *generic.c))
 
 build: $(SOURCES) $(OBJ) $(OBJECTS)
 	$(CPP) $(OBJ) -o $(LAB) $(CPPLIB) -lm
 
-$(OBJ): *.c
+$(OBJ): *generic.c
 	$(CPP) $(CARGS) -g -c $< -o $@ $(CPPLIB) -lm
 
 clean:
