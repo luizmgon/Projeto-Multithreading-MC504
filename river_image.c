@@ -1,7 +1,7 @@
 #include <stdio.h>
+#include <ncurses.h>
 #define ESPACOS 25
 #define RIO 100
-
 
 /* O desenho deve ter o seguinte formato:
   Esperando
@@ -41,645 +41,645 @@ Barquinho em movimento
 void estado_atual_chegada(int nhackers, int nserfs){
     //topo
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 
     //título
     int espac_serf = ((ESPACOS-11)/2);
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Microsofter"); 
+    printw("Microsofter"); 
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //corpinho
     int espac_corpinho = ESPACOS;
     for(int i = 0;i<nserfs;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
         
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<ESPACOS+4;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     //pernas
     int espac_pernas = ESPACOS;
     for(int i = 0;i<nserfs;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<ESPACOS+3;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|____");
+    printw("|____");
     for(int i=0;i<ESPACOS-2;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<2*ESPACOS+2;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf(" ____");
+    printw(" ____");
     for(int i=0;i<ESPACOS-4;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<ESPACOS-1;i++){
-        printf("_");
+        printw("_");
     }
-    printf("/\n");
+    printw("/\n");
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Hackers"); 
+    printw("Hackers"); 
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
 
     //corpinho
     espac_corpinho = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
 
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 }
 
 void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int estagio){
     //topo
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 
     //título
     int espac_serf = ((ESPACOS-11)/2);
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Microsofter"); 
+    printw("Microsofter"); 
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //corpinho
     int espac_corpinho = ESPACOS;
     for(int i=0;i<nserfs;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
         
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<estagio*ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     for(int i=0;i<ESPACOS+4;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     //pernas
     int espac_pernas = ESPACOS;
     for(int i=0;i<nserfs;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("| ");
+    printw("| ");
     for(int i=0;i<estagio*ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     for(int i=0;i<ESPACOS+2;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|__");
+    printw("|__");
     for(int i=0;i<estagio*ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS+2;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf(" |");
+    printw(" |");
     for(int i=0;i<estagio*ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     int barco_cabeca = ESPACOS - 2;
     //cabeças hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf("   O");
+        printw("   O");
         barco_cabeca = barco_cabeca - 4;
     }
     //cabeças serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf("   O");
+        printw("   O");
         barco_cabeca = barco_cabeca - 4;
     }
     for(int i=0;i<barco_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf(" __| ");
+    printw(" __| ");
     for(int i=0;i<estagio*ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     int barco_corpinhos = ESPACOS - 4;
     //corpinho hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf(" -|-");
+        printw(" -|-");
         barco_corpinhos = barco_corpinhos - 4;
     }
     //corpinho serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf(" -|-");
+        printw(" -|-");
         barco_corpinhos = barco_corpinhos - 4;
     }
     for(int i=0;i<barco_corpinhos;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<(5 + estagio*ESPACOS);i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("\\");
+    printw("\\");
     int barco_pernas = ESPACOS - 6;
     //pernas hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf("/ \\");
-        printf("_");
+        printw("/ \\");
+        printw("_");
         barco_pernas = barco_pernas - 4;
     }
     //pernas serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf(" -|-");
+        printw(" -|-");
         barco_pernas = barco_pernas - 4;
     }
     for(int i=0;i<barco_pernas;i++){
-        printf("_");
+        printw("_");
     }
-    printf("/\n");
+    printw("/\n");
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Hackers"); 
+    printw("Hackers"); 
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
 
     //corpinho
     espac_corpinho = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
 
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 }
 
 void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int estagio){
     //topo
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 
     //título
     int espac_serf = ((ESPACOS-11)/2);
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Microsofter"); 
+    printw("Microsofter"); 
     for(int i=0;i<espac_serf;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|\n");
+    printw("|\n");
 
     //corpinho
     int espac_corpinho = ESPACOS;
     for(int i=0;i<nserfs;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
         
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     for(int i=0;i<ESPACOS + 5;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     //pernas
     int espac_pernas = ESPACOS;
     for(int i=0;i<nserfs;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("| ");
+    printw("| ");
     for(int i=0;i<ESPACOS+3;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|____");
+    printw("|____");
     for(int i=0;i<ESPACOS-1;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS+5;i++){
-        printf(" ");
+        printw(" ");
     }
     int barco_cabeca = ESPACOS - 2;
     //cabeças hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf("   O");
+        printw("   O");
         barco_cabeca = barco_cabeca - 4;
     }
     //cabeças serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf("   O");
+        printw("   O");
         barco_cabeca = barco_cabeca - 4;
     }
     for(int i=0;i<barco_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf(" ____ ");
+    printw(" ____ ");
     int barco_corpinhos = ESPACOS - 4;
     //corpinho hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf(" -|-");
+        printw(" -|-");
         barco_corpinhos = barco_corpinhos - 4;
     }
     //corpinho serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf(" -|-");
+        printw(" -|-");
         barco_corpinhos = barco_corpinhos - 4;
     }
     for(int i=0;i<barco_corpinhos;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("/\n");
+    printw("/\n");
     for(int i=0;i<ESPACOS;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|______");
+    printw("|______");
     int barco_pernas = ESPACOS - 6;
     //pernas hackers dentro
     for(int i=0;i<hackers_barco;i++){
-        printf("/ \\");
-        printf("_");
+        printw("/ \\");
+        printw("_");
         barco_pernas = barco_pernas - 4;
     }
     //pernas serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printf("/ \\");
-        printf("_");
+        printw("/ \\");
+        printw("_");
         barco_pernas = barco_pernas - 4;
     }
     for(int i=0;i<barco_pernas;i++){
-        printf("_");
+        printw("_");
     }
-    printf("/\n");
+    printw("/\n");
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("Hackers"); 
+    printw("Hackers"); 
     for(int i=0;i<espac_hackers;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
-        printf("   O"); 
+        printw("   O"); 
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
 
     //corpinho
     espac_corpinho = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  -|-"); 
+            printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
         }
         else{
-            printf(" -|-"); 
+            printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
     }
     for(int i=0;i<espac_corpinho;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
 
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
-            printf("  / \\"); 
+            printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
         }
         else{
-            printf(" / \\"); 
+            printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
     }
     for(int i=0;i<espac_pernas;i++){
-        printf(" ");
+        printw(" ");
     }
-    printf("|");
+    printw("|");
     //rio
     for(int i=0;i<RIO;i++){
-        printf("~");
+        printw("~");
     }
-    printf("\n"); 
+    printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
-        printf("="); 
+        printw("="); 
     }
-    printf("|\n");
+    printw("|\n");
 }

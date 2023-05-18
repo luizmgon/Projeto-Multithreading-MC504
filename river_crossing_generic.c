@@ -5,10 +5,11 @@
 #include <unistd.h>
 #include <math.h>
 #include <time.h>
+#include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 4
-#define N_SERFS 1
+#define N_HACKERS 2
+#define N_SERFS 2
 #define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
@@ -26,22 +27,28 @@ int serfs_barco = 0;
 // Ação de embarque dos personagens no barco.
 void board(char category)
 {
+    sem_wait(&show);
     if (category == 's')
     {
-        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
-        //printf("-----------Embarcou um microsofter--------------\n\n");
+        //embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        clear();
+        printw("-----------Embarcou um microsofter--------------\n\n");
+        refresh();
         sleep(1);
         serfs_barco = serfs_barco + 1;
     }
     else
     {
-        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
-        //printf("-----------Embarcou um hacker-----------------\n\n");
+        //embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        clear();
+        printw("-----------Embarcou um hacker-----------------\n\n");
+        refresh();
         sleep(1);
         hackers_barco = hackers_barco + 1;
     }
 
     usleep(500000);
+    sem_post(&show);
 
 }
 
@@ -49,7 +56,7 @@ void board(char category)
 void rowBoat()
 {
     //sleep(1);
-    remando(hackers,serfs,hackers_barco,serfs_barco,0);
+    /*remando(hackers,serfs,hackers_barco,serfs_barco,0);
     sleep(1);
     remando(hackers,serfs,hackers_barco,serfs_barco,1);
     sleep(1);
@@ -64,7 +71,10 @@ void rowBoat()
     remando(hackers,serfs,0,0,1);
     sleep(1);
     remando(hackers,serfs,0,0,0);
-    //printf("O barco partiu\n\n");
+    //printf("O barco partiu\n\n");*/
+    clear();
+    printw("O barco partiu\n\n");
+    refresh();
     sleep(1);
 }
 
@@ -73,9 +83,12 @@ void newSerfArrived()
 {
     serfs += 1;
     sem_wait(&show);
+    //estado_atual_chegada(hackers, serfs);
+    clear();
+    //printw("Chegou um microsofter\n\n");
     estado_atual_chegada(hackers, serfs);
+    refresh();
     sem_post(&show);
-    //printf("Chegou um microsofter\n\n");
     usleep(500000);
 }
 
@@ -84,7 +97,10 @@ void newHackerArrived()
 {
     hackers += 1;
     sem_wait(&show);
-    estado_atual_chegada(hackers, serfs);
+    //estado_atual_chegada(hackers, serfs);
+    clear();
+    printw("Chegou um hacker\n\n");
+    refresh();
     sem_post(&show);
     //printf("Chegou um hacker\n\n");
     usleep(500000);
@@ -179,7 +195,10 @@ void *thread_hackers()
 }
 
 int main()
-{
+{   
+    //inicializando biblioteca gráfica
+    initscr();
+
 
     // Inicialização de semáforos e barreiras.
     pthread_barrier_init(&barrier, NULL, N_VAGAS);
@@ -291,14 +310,17 @@ int main()
     for (int i = 0; i < (N_HACKERS - n_hackers_left); i++)
     {
         sem_post(&hacker_queue);
-        printf("Um hacker não conseguiu atravessar\n\n");
+        //printf("Um hacker não conseguiu atravessar\n\n");
     }
 
     for (int i = 0; i < (N_SERFS - n_serfs_left); i++)
     {
         sem_post(&serf_queue);
-        printf("Um microsofter não conseguiu atravessar\n\n");
+        //printf("Um microsofter não conseguiu atravessar\n\n");
     }
+
+    //encerrando biblioteca gráfica
+    endwin();
 
     return 0;
 }
