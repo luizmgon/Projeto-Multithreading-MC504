@@ -60,6 +60,7 @@ void board(char category)
 
 }
 
+
 // Ação de partida do barco.
 void rowBoat()
 {
@@ -228,10 +229,14 @@ void *thread_hackers()
 
 int main()
 {   
-    //inicializando biblioteca gráfica
+    //inicializando biblioteca gráfica com cores
     initscr();
-
-
+    start_color();
+    init_pair(4, COLOR_RED, COLOR_BLACK);
+    init_pair(1, COLOR_BLUE, COLOR_CYAN);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
+    init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
+    
     // Inicialização de semáforos e barreiras.
     pthread_barrier_init(&barrier, NULL, N_VAGAS);
     sem_init(&mutex, 0, 1);
@@ -245,6 +250,7 @@ int main()
 
     int n_hackers_left = N_HACKERS;
     int n_serfs_left = N_SERFS;
+
 
     /*Correção do número de Hackers e Microsofters de entrada para evitar deadlock ao final da execução.
 
@@ -337,6 +343,7 @@ int main()
             pthread_join(thr_serfs[i], NULL);
         }
     }
+
 
     // Indicação dos indíviduos que foram removidos por não formarem grupos necessários para a travessia.
     for (int i = 0; i < (N_HACKERS - n_hackers_left); i++)

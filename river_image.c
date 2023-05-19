@@ -59,7 +59,10 @@ void estado_atual_chegada(int nhackers, int nserfs){
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
-        printw("   O"); 
+        printw("   ");
+        attron(COLOR_PAIR(2));
+        printw("O"); 
+        attroff(COLOR_PAIR(2));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -70,6 +73,7 @@ void estado_atual_chegada(int nhackers, int nserfs){
     //corpinho
     int espac_corpinho = ESPACOS;
     for(int i = 0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         if(i==0){
             printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
@@ -78,6 +82,7 @@ void estado_atual_chegada(int nhackers, int nserfs){
             printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
+        attroff(COLOR_PAIR(2));
         
     }
     for(int i=0;i<espac_corpinho;i++){
@@ -87,10 +92,13 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i=0;i<ESPACOS+4;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     //pernas
     int espac_pernas = ESPACOS;
     for(int i = 0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         if(i==0){
             printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
@@ -99,6 +107,7 @@ void estado_atual_chegada(int nhackers, int nserfs){
             printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
+        attroff(COLOR_PAIR(2));
     }
     for(int i=0;i<espac_pernas;i++){
         printw(" ");
@@ -107,21 +116,29 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i=0;i<ESPACOS+3;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("|____");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS-2;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<2*ESPACOS+2;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
@@ -129,15 +146,21 @@ void estado_atual_chegada(int nhackers, int nserfs){
     for(int i=0;i<ESPACOS-4;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
     printw("|");
     for(int i=0;i<ESPACOS-1;i++){
+        attron(COLOR_PAIR(4));
         printw("_");
+        attroff(COLOR_PAIR(4));
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
@@ -149,15 +172,19 @@ void estado_atual_chegada(int nhackers, int nserfs){
         printw(" ");
     }
     printw("|");
+    attron(COLOR_PAIR(1));
     //rio
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
+        attron(COLOR_PAIR(3));
         printw("   O"); 
+        attroff(COLOR_PAIR(3));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -165,20 +192,26 @@ void estado_atual_chegada(int nhackers, int nserfs){
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
 
     //corpinho
     espac_corpinho = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
+            attron(COLOR_PAIR(3));
             printw("  -|-"); 
+            attroff(COLOR_PAIR(3));
             espac_corpinho = espac_corpinho - 5;
         }
         else{
+            attron(COLOR_PAIR(3));
             printw(" -|-"); 
+            attroff(COLOR_PAIR(3));
             espac_corpinho = espac_corpinho - 4;
         }
     }
@@ -188,19 +221,25 @@ void estado_atual_chegada(int nhackers, int nserfs){
     printw("|");
 
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
     for(int i = 0;i<nhackers;i++){
         if(i==0){
+            attron(COLOR_PAIR(3));
             printw("  / \\"); 
+            attroff(COLOR_PAIR(3));
             espac_pernas = espac_pernas - 5;
         }
         else{
+            attron(COLOR_PAIR(3));
             printw(" / \\"); 
+            attroff(COLOR_PAIR(3));
             espac_pernas = espac_pernas - 4;
         }
     }
@@ -209,9 +248,11 @@ void estado_atual_chegada(int nhackers, int nserfs){
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
@@ -241,7 +282,9 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         printw("   O"); 
+        attroff(COLOR_PAIR(2));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -269,11 +312,15 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<estagio*ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS+4;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     //pernas
     int espac_pernas = ESPACOS;
     for(int i=0;i<nserfs;i++){
@@ -293,11 +340,15 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<estagio*ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS+2;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
@@ -307,11 +358,15 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<estagio*ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS+2;i++){
         printw(" ");
     }
@@ -319,22 +374,30 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<estagio*ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     int barco_cabeca = ESPACOS - 2;
     //cabeças hackers dentro
     for(int i=0;i<hackers_barco;i++){
+        attron(COLOR_PAIR(3));
         printw("   O");
+        attroff(COLOR_PAIR(3));
         barco_cabeca = barco_cabeca - 4;
     }
     //cabeças serfs dentro
     for(int i=0;i<serfs_barco;i++){
+        attron(COLOR_PAIR(2));
         printw("   O");
+        attroff(COLOR_PAIR(2));
         barco_cabeca = barco_cabeca - 4;
     }
     for(int i=0;i<barco_cabeca;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
@@ -342,7 +405,9 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<estagio*ESPACOS;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     int barco_corpinhos = ESPACOS - 4;
     //corpinho hackers dentro
     for(int i=0;i<hackers_barco;i++){
@@ -357,7 +422,9 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<barco_corpinhos;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
@@ -365,12 +432,16 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<(5 + estagio*ESPACOS);i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("\\");
+    attroff(COLOR_PAIR(4));
     int barco_pernas = ESPACOS - 6;
     //pernas hackers dentro
     for(int i=0;i<hackers_barco;i++){
         printw("/ \\");
+        attron(COLOR_PAIR(4));
         printw("_");
+        attroff(COLOR_PAIR(4));
         barco_pernas = barco_pernas - 4;
     }
     //pernas serfs dentro
@@ -380,9 +451,13 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
         barco_pernas = barco_pernas - 4;
     }
     for(int i=0;i<barco_pernas;i++){
+        attron(COLOR_PAIR(4));
         printw("_");
+        attroff(COLOR_PAIR(4));
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
@@ -395,14 +470,18 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
+        attron(COLOR_PAIR(3));
         printw("   O"); 
+        attroff(COLOR_PAIR(3));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -410,9 +489,11 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
 
     //corpinho
@@ -433,9 +514,11 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     printw("|");
 
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
@@ -454,9 +537,11 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
@@ -486,7 +571,9 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     //cabeças
     int espac_cabeca = ESPACOS;
     for(int i = 0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         printw("   O"); 
+        attroff(COLOR_PAIR(2));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -497,6 +584,7 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     //corpinho
     int espac_corpinho = ESPACOS;
     for(int i=0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         if(i==0){
             printw("  -|-"); 
             espac_corpinho = espac_corpinho - 5;
@@ -505,7 +593,7 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
             printw(" -|-"); 
             espac_corpinho = espac_corpinho - 4;
         }
-        
+        attroff(COLOR_PAIR(2));
     }
     for(int i=0;i<espac_corpinho;i++){
         printw(" ");
@@ -514,10 +602,13 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<ESPACOS + 5;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     //pernas
     int espac_pernas = ESPACOS;
     for(int i=0;i<nserfs;i++){
+        attron(COLOR_PAIR(2));
         if(i==0){
             printw("  / \\"); 
             espac_pernas = espac_pernas - 5;
@@ -526,6 +617,7 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
             printw(" / \\"); 
             espac_pernas = espac_pernas - 4;
         }
+        attroff(COLOR_PAIR(2));
     }
     for(int i=0;i<espac_pernas;i++){
         printw(" ");
@@ -534,7 +626,9 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<ESPACOS+3;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //caminho pro barco
     for(int i=0;i<ESPACOS;i++){
@@ -544,25 +638,33 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<ESPACOS-1;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS+5;i++){
         printw(" ");
     }
     int barco_cabeca = ESPACOS - 2;
     //cabeças hackers dentro
     for(int i=0;i<hackers_barco;i++){
+        attron(COLOR_PAIR(2));
         printw("   O");
+        attroff(COLOR_PAIR(2));
         barco_cabeca = barco_cabeca - 4;
     }
     //cabeças serfs dentro
     for(int i=0;i<serfs_barco;i++){
+        attron(COLOR_PAIR(3));
         printw("   O");
+        attroff(COLOR_PAIR(3));
         barco_cabeca = barco_cabeca - 4;
     }
     for(int i=0;i<barco_cabeca;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
@@ -581,10 +683,13 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<barco_corpinhos;i++){
         printw(" ");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
     for(int i=0;i<ESPACOS;i++){
         printw(" ");
     }
+
     printw("|______");
     int barco_pernas = ESPACOS - 6;
     //pernas hackers dentro
@@ -602,7 +707,9 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     for(int i=0;i<barco_pernas;i++){
         printw("_");
     }
+    attron(COLOR_PAIR(4));
     printw("/\n");
+    attroff(COLOR_PAIR(4));
 
     //título
     int espac_hackers = ((ESPACOS-7)/2);
@@ -615,14 +722,18 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //cabeças
     espac_cabeca = ESPACOS;
     for(int i = 0;i<nhackers;i++){
+        attron(COLOR_PAIR(3));
         printw("   O"); 
+        attroff(COLOR_PAIR(3));
         espac_cabeca = espac_cabeca - 4;
     }
     for(int i=0;i<espac_cabeca;i++){
@@ -630,9 +741,11 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
 
     //corpinho
@@ -653,9 +766,11 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     printw("|");
 
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //pernas
     espac_pernas = ESPACOS;
@@ -674,9 +789,11 @@ void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     printw("|");
     //rio
+    attron(COLOR_PAIR(1));
     for(int i=0;i<RIO;i++){
         printw("~");
     }
+    attroff(COLOR_PAIR(1));
     printw("\n"); 
     //base
     for(int i = 0;i<ESPACOS;i++){
