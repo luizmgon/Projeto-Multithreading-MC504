@@ -375,7 +375,8 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
     }
     //pernas serfs dentro
     for(int i=0;i<serfs_barco;i++){
-        printw(" -|-");
+        printw("/ \\");
+        printw("_");
         barco_pernas = barco_pernas - 4;
     }
     for(int i=0;i<barco_pernas;i++){

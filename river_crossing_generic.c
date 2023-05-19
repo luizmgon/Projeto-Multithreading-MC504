@@ -8,8 +8,8 @@
 #include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 4
-#define N_SERFS 4
+#define N_HACKERS 8
+#define N_SERFS 8
 #define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
@@ -19,10 +19,12 @@ sem_t mutex;
 sem_t show;
 sem_t serf_queue;
 sem_t hacker_queue;
-int hackers = 0;
-int serfs = 0;
-int hackers_barco = 0;
-int serfs_barco = 0;
+volatile int hackers = 0;
+volatile int serfs = 0;
+volatile int hackers_barco = 0;
+volatile int serfs_barco = 0;
+volatile int hackers_embarca = 0;
+volatile int serfs_embarca = 0;
 
 // Ação de embarque dos personagens no barco.
 void board(char category)
@@ -32,19 +34,25 @@ void board(char category)
     {
         clear();
         //printw("-----------Embarcou um microsofter--------------\n\n");
-        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        serfs_embarca = serfs_embarca - 1;
+        serfs_barco = serfs_barco + 1;
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0);
+        
         refresh();
         sleep(1);
-        serfs_barco = serfs_barco + 1;
+        
     }
     else
     {
         clear();
         //printw("-----------Embarcou um hacker-----------------\n\n");
-        embarca(hackers, serfs,hackers_barco, serfs_barco,0);
+        hackers_embarca = hackers_embarca - 1;
+        hackers_barco = hackers_barco + 1;
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0);
+        
         refresh();
         sleep(1);
-        hackers_barco = hackers_barco + 1;
+        
     }
 
     usleep(500000);
@@ -134,6 +142,8 @@ void *thread_serfs()
     {
         for (int i = 0; i < serfs; i ++)
             sem_post(&serf_queue);
+        serfs_embarca = serfs;
+        hackers_embarca = 0;
         serfs = 0;
         is_captain = 1;
     }
@@ -145,7 +155,9 @@ void *thread_serfs()
         for (int i = 0; i < N_VAGAS - serfs; i ++){
             sem_post(&hacker_queue);
         }
+        serfs_embarca = serfs;
         hackers -= N_VAGAS - serfs;
+        hackers_embarca = N_VAGAS - serfs;
         serfs = 0;
         is_captain = 1;
     }
@@ -178,6 +190,8 @@ void *thread_hackers()
     {
         for (int i = 0; i < hackers; i ++)
             sem_post(&hacker_queue);
+        hackers_embarca = hackers;
+        serfs_embarca = 0;
         hackers = 0;
         is_captain = 1;
     }
@@ -189,7 +203,9 @@ void *thread_hackers()
         for (int i = 0; i < N_VAGAS - hackers; i ++){
             sem_post(&serf_queue);
         }
+        hackers_embarca = hackers;
         serfs -= N_VAGAS - hackers;
+        serfs_embarca = N_VAGAS - hackers;
         hackers = 0;
         is_captain = 1;
     }

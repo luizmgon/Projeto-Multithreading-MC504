@@ -1,7 +1,7 @@
 .PHONY: build clean
 
 INC = /home/dellarrivalisa/gurobi1000/linux64/include/
-CPPLIB = -lncurses
+CPPLIB = -lncurses -lpthread
 CPP = gcc
 #CARGS = -m64 -Wall 
 SOURCES = *generic.c
