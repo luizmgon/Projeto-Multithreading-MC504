@@ -8,8 +8,8 @@
 #include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 8
-#define N_SERFS 8
+#define N_HACKERS 2
+#define N_SERFS 2
 #define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
@@ -36,7 +36,7 @@ void board(char category)
         //printw("-----------Embarcou um microsofter--------------\n\n");
         serfs_embarca = serfs_embarca - 1;
         serfs_barco = serfs_barco + 1;
-        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0);
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0,N_VAGAS);
         
         refresh();
         sleep(1);
@@ -48,12 +48,13 @@ void board(char category)
         //printw("-----------Embarcou um hacker-----------------\n\n");
         hackers_embarca = hackers_embarca - 1;
         hackers_barco = hackers_barco + 1;
-        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0);
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0,N_VAGAS);
         
         refresh();
         sleep(1);
         
     }
+
 
     usleep(500000);
     sem_post(&show);
@@ -236,7 +237,7 @@ int main()
     init_pair(1, COLOR_BLUE, COLOR_CYAN);
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
-    
+
     // Inicialização de semáforos e barreiras.
     pthread_barrier_init(&barrier, NULL, N_VAGAS);
     sem_init(&mutex, 0, 1);
@@ -288,6 +289,7 @@ int main()
                 n_serfs_left -= 2;
         }
     } */
+
 
     int maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
 
