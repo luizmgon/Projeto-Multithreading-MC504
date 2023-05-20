@@ -8,8 +8,8 @@
 #include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 2
-#define N_SERFS 2
+#define N_HACKERS 12
+#define N_SERFS 12
 #define N_VAGAS 4
 #define PORCENTAGEM_MINIMA 0.25
 
@@ -33,72 +33,67 @@ void board(char category)
     if (category == 's')
     {
         clear();
-        //printw("-----------Embarcou um microsofter--------------\n\n");
+        // printw("-----------Embarcou um microsofter--------------\n\n");
         serfs_embarca = serfs_embarca - 1;
         serfs_barco = serfs_barco + 1;
-        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0,N_VAGAS);
-        
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca, hackers_barco, serfs_barco, 0, N_VAGAS);
+
         refresh();
         sleep(1);
-        
     }
     else
     {
         clear();
-        //printw("-----------Embarcou um hacker-----------------\n\n");
+        // printw("-----------Embarcou um hacker-----------------\n\n");
         hackers_embarca = hackers_embarca - 1;
         hackers_barco = hackers_barco + 1;
-        embarca(hackers + hackers_embarca, serfs + serfs_embarca,hackers_barco, serfs_barco,0,N_VAGAS);
-        
+        embarca(hackers + hackers_embarca, serfs + serfs_embarca, hackers_barco, serfs_barco, 0, N_VAGAS);
+
         refresh();
         sleep(1);
-        
     }
-
 
     usleep(500000);
     sem_post(&show);
-
 }
-
 
 // Ação de partida do barco.
 void rowBoat()
 {
-    //sleep(1);
+    // sleep(1);;
     clear();
-    remando(hackers,serfs,hackers_barco,serfs_barco,0);
+    remando(hackers, serfs, hackers_barco, serfs_barco, 0);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,hackers_barco,serfs_barco,1);
+    remando(hackers, serfs, hackers_barco, serfs_barco, 1);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,hackers_barco,serfs_barco,2);
+    remando(hackers, serfs, hackers_barco, serfs_barco, 2);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,hackers_barco,serfs_barco,3);
+    remando(hackers, serfs, hackers_barco, serfs_barco, 3);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,0,0,3);
+    remando(hackers, serfs, 0, 0, 3);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,0,0,2);
+    remando(hackers, serfs, 0, 0, 2);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,0,0,1);
+    remando(hackers, serfs, 0, 0, 1);
     refresh();
     sleep(1);
     clear();
-    remando(hackers,serfs,0,0,0);
+    remando(hackers, serfs, 0, 0, 0);
     refresh();
-    //printf("O barco partiu\n\n");*/
-    //printw("O barco partiu\n\n");
+    // printf("O barco partiu\n\n");*/
+    // printw("O barco partiu\n\n");
     sleep(1);
     serfs_barco = 0;
     hackers_barco = 0;
@@ -109,9 +104,9 @@ void newSerfArrived()
 {
     serfs += 1;
     sem_wait(&show);
-    //estado_atual_chegada(hackers, serfs);
+    // estado_atual_chegada(hackers, serfs);
     clear();
-    //printw("Chegou um microsofter\n\n");
+    // printw("Chegou um microsofter\n\n");
     estado_atual_chegada(hackers, serfs);
     refresh();
     sem_post(&show);
@@ -124,11 +119,11 @@ void newHackerArrived()
     hackers += 1;
     sem_wait(&show);
     clear();
-    //printw("Chegou um hacker\n\n");
+    // printw("Chegou um hacker\n\n");
     estado_atual_chegada(hackers, serfs);
     refresh();
     sem_post(&show);
-    //printf("Chegou um hacker\n\n");
+    // printf("Chegou um hacker\n\n");
     usleep(500000);
 }
 
@@ -139,22 +134,25 @@ void *thread_serfs()
     sem_wait(&mutex);
 
     newSerfArrived();
+    sem_wait(&show);
 
     if (serfs == N_VAGAS)
     {
-        for (int i = 0; i < serfs; i ++)
+        for (int i = 0; i < serfs; i++)
             sem_post(&serf_queue);
         serfs_embarca = serfs;
         hackers_embarca = 0;
         serfs = 0;
         is_captain = 1;
     }
-    else if ((serfs > PORCENTAGEM_MINIMA*N_VAGAS) && (hackers >= N_VAGAS - serfs) && (N_VAGAS - serfs) > PORCENTAGEM_MINIMA*N_VAGAS)
+    else if ((serfs > PORCENTAGEM_MINIMA * N_VAGAS) && (hackers >= N_VAGAS - serfs) && (N_VAGAS - serfs) > PORCENTAGEM_MINIMA * N_VAGAS)
     {
-        for (int i = 0; i < serfs; i ++){
+        for (int i = 0; i < serfs; i++)
+        {
             sem_post(&serf_queue);
         }
-        for (int i = 0; i < N_VAGAS - serfs; i ++){
+        for (int i = 0; i < N_VAGAS - serfs; i++)
+        {
             sem_post(&hacker_queue);
         }
         serfs_embarca = serfs;
@@ -167,6 +165,7 @@ void *thread_serfs()
     {
         sem_post(&mutex);
     }
+    sem_post(&show);
 
     sem_wait(&serf_queue);
 
@@ -187,22 +186,25 @@ void *thread_hackers()
     sem_wait(&mutex);
 
     newHackerArrived();
+    sem_wait(&show);
 
     if (hackers == N_VAGAS)
     {
-        for (int i = 0; i < hackers; i ++)
+        for (int i = 0; i < hackers; i++)
             sem_post(&hacker_queue);
         hackers_embarca = hackers;
         serfs_embarca = 0;
         hackers = 0;
         is_captain = 1;
     }
-    else if ((hackers > PORCENTAGEM_MINIMA*N_VAGAS) && (serfs >= N_VAGAS - hackers) && (N_VAGAS - hackers) > PORCENTAGEM_MINIMA*N_VAGAS)
+    else if ((hackers > PORCENTAGEM_MINIMA * N_VAGAS) && (serfs >= N_VAGAS - hackers) && (N_VAGAS - hackers) > PORCENTAGEM_MINIMA * N_VAGAS)
     {
-        for (int i = 0; i < hackers; i ++){
+        for (int i = 0; i < hackers; i++)
+        {
             sem_post(&hacker_queue);
         }
-        for (int i = 0; i < N_VAGAS - hackers; i ++){
+        for (int i = 0; i < N_VAGAS - hackers; i++)
+        {
             sem_post(&serf_queue);
         }
         hackers_embarca = hackers;
@@ -215,6 +217,7 @@ void *thread_hackers()
     {
         sem_post(&mutex);
     }
+    sem_post(&show);
 
     sem_wait(&hacker_queue);
 
@@ -229,8 +232,8 @@ void *thread_hackers()
 }
 
 int main()
-{   
-    //inicializando biblioteca gráfica com cores
+{
+    // inicializando biblioteca gráfica com cores
     initscr();
     start_color();
     init_pair(4, COLOR_RED, COLOR_BLACK);
@@ -243,7 +246,7 @@ int main()
     sem_init(&mutex, 0, 1);
     sem_init(&hacker_queue, 0, 0);
     sem_init(&serf_queue, 0, 0);
-    sem_init(&show, 0 , 1);
+    sem_init(&show, 0, 1);
 
     // Inicialização das Threads.
     pthread_t thr_hackers[N_HACKERS];
@@ -251,7 +254,6 @@ int main()
 
     int n_hackers_left = N_HACKERS;
     int n_serfs_left = N_SERFS;
-
 
     /*Correção do número de Hackers e Microsofters de entrada para evitar deadlock ao final da execução.
 
@@ -267,66 +269,71 @@ int main()
     não formaram grupos para travessia e que ficariam eternamente aguardando.
     Por isso é feita essa correção de não colocá-los na fila e posteriormente é indicado
     quem não conseguiu atravessar.*/
-/*     if (!(
-            ((n_hackers_left % 4) == 0 && (n_serfs_left % 4) == 0) ||
-            (((n_hackers_left % 2 == 0) && (n_serfs_left % 2 == 0)) && ((n_hackers_left % 4 != 0) && (n_serfs_left % 4 != 0)))))
-    {
-        if (n_hackers_left % 2 != 0)
+    /*     if (!(
+                ((n_hackers_left % 4) == 0 && (n_serfs_left % 4) == 0) ||
+                (((n_hackers_left % 2 == 0) && (n_serfs_left % 2 == 0)) && ((n_hackers_left % 4 != 0) && (n_serfs_left % 4 != 0)))))
         {
-            n_hackers_left--;
-        }
-        if (n_serfs_left % 2 != 0)
-        {
-            n_serfs_left--;
-        }
-        if (!(
-            ((n_hackers_left % 4) == 0 && (n_serfs_left % 4) == 0) ||
-            (((n_hackers_left % 2 == 0) && (n_serfs_left % 2 == 0)) && ((n_hackers_left % 4 != 0) && (n_serfs_left % 4 != 0)))))
-        {
-            if (n_hackers_left > n_serfs_left)
-                n_hackers_left -= 2;
-            else
-                n_serfs_left -= 2;
-        }
-    } */
-
+            if (n_hackers_left % 2 != 0)
+            {
+                n_hackers_left--;
+            }
+            if (n_serfs_left % 2 != 0)
+            {
+                n_serfs_left--;
+            }
+            if (!(
+                ((n_hackers_left % 4) == 0 && (n_serfs_left % 4) == 0) ||
+                (((n_hackers_left % 2 == 0) && (n_serfs_left % 2 == 0)) && ((n_hackers_left % 4 != 0) && (n_serfs_left % 4 != 0)))))
+            {
+                if (n_hackers_left > n_serfs_left)
+                    n_hackers_left -= 2;
+                else
+                    n_serfs_left -= 2;
+            }
+        } */
 
     int maximo = n_hackers_left > n_serfs_left ? n_hackers_left : n_serfs_left;
 
     int num;
-    //int p1, p2;
+    // int p1, p2;
     double prob;
     int j = 0, k = 0;
     // Criação das Threads.
-    prob = (double) rand() / RAND_MAX;
+    prob = (double)rand() / RAND_MAX;
     for (int i = 0; i < n_serfs_left + n_hackers_left; i++)
     {
-        prob = (double) rand() / RAND_MAX; // Gera um número aleatório entre 0 e 1
+        prob = (double)rand() / RAND_MAX; // Gera um número aleatório entre 0 e 1
 
-        if (prob < 0.5){ 
-            if (j < n_hackers_left){
+        if (prob < 0.5)
+        {
+            if (j < n_hackers_left)
+            {
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                // sleep(num);
                 pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
                 j++;
             }
-            else{
+            else
+            {
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                // sleep(num);
                 pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
                 k++;
             }
         }
-        else{
-            if (k < n_serfs_left){
+        else
+        {
+            if (k < n_serfs_left)
+            {
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                // sleep(num);
                 pthread_create(&thr_serfs[k], NULL, thread_serfs, NULL);
                 k++;
             }
-            else{
+            else
+            {
                 num = rand() % 3 + 1; // gera um número aleatório entre 0 e 2, soma 1 para obter um número entre 1 e 3
-                //sleep(num);
+                // sleep(num);
                 pthread_create(&thr_hackers[j], NULL, thread_hackers, NULL);
                 j++;
             }
@@ -346,21 +353,20 @@ int main()
         }
     }
 
-
     // Indicação dos indíviduos que foram removidos por não formarem grupos necessários para a travessia.
     for (int i = 0; i < (N_HACKERS - n_hackers_left); i++)
     {
         sem_post(&hacker_queue);
-        //printf("Um hacker não conseguiu atravessar\n\n");
+        // printf("Um hacker não conseguiu atravessar\n\n");
     }
 
     for (int i = 0; i < (N_SERFS - n_serfs_left); i++)
     {
         sem_post(&serf_queue);
-        //printf("Um microsofter não conseguiu atravessar\n\n");
+        // printf("Um microsofter não conseguiu atravessar\n\n");
     }
 
-    //encerrando biblioteca gráfica
+    // encerrando biblioteca gráfica
     endwin();
 
     return 0;
