@@ -7,7 +7,7 @@
 #include <time.h>
 
 #define N_HACKERS 4
-#define N_SERFS 1
+#define N_SERFS 4
 
 // Variáveis globais do problema.
 pthread_barrier_t barrier;

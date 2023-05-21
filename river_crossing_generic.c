@@ -8,9 +8,9 @@
 #include <ncurses.h>
 #include "river_image.c"
 
-#define N_HACKERS 2
-#define N_SERFS 2
-#define N_VAGAS 4
+#define N_HACKERS 12
+#define N_SERFS 12
+#define N_VAGAS 8
 #define PORCENTAGEM_MINIMA 0.25
 
 // Variáveis globais do problema.

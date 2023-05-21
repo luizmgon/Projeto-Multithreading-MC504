@@ -559,7 +559,6 @@ void remando(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int e
 }
 
 void embarca(int nhackers, int nserfs, int hackers_barco, int serfs_barco, int estagio, int n_vagas){
-    printw("%d",n_vagas);
     //topo
     for(int i = 0;i<ESPACOS;i++){
         printw("="); 
