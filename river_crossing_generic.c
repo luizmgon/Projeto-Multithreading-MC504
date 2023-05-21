@@ -33,7 +33,6 @@ void board(char category)
     if (category == 's')
     {
         clear();
-        // printw("-----------Embarcou um microsofter--------------\n\n");
         serfs_embarca = serfs_embarca - 1;
         serfs_barco = serfs_barco + 1;
         embarca(hackers + hackers_embarca, serfs + serfs_embarca, hackers_barco, serfs_barco, 0, N_VAGAS);
@@ -44,7 +43,6 @@ void board(char category)
     else
     {
         clear();
-        // printw("-----------Embarcou um hacker-----------------\n\n");
         hackers_embarca = hackers_embarca - 1;
         hackers_barco = hackers_barco + 1;
         embarca(hackers + hackers_embarca, serfs + serfs_embarca, hackers_barco, serfs_barco, 0, N_VAGAS);
@@ -104,9 +102,7 @@ void newSerfArrived()
 {
     serfs += 1;
     sem_wait(&show);
-    // estado_atual_chegada(hackers, serfs);
     clear();
-    // printw("Chegou um microsofter\n\n");
     estado_atual_chegada(hackers, serfs);
     refresh();
     sem_post(&show);
@@ -119,11 +115,9 @@ void newHackerArrived()
     hackers += 1;
     sem_wait(&show);
     clear();
-    // printw("Chegou um hacker\n\n");
     estado_atual_chegada(hackers, serfs);
     refresh();
     sem_post(&show);
-    // printf("Chegou um hacker\n\n");
     usleep(500000);
 }
 

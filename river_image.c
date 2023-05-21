@@ -5,6 +5,7 @@
 #define COLOR_SERFS 2
 #define COLOR_HACKERS 3
 
+
 /* O desenho deve ter o seguinte formato:
   Esperando
 ======================|

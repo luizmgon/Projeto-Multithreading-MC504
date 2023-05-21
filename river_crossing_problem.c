@@ -138,7 +138,6 @@ void *thread_hackers()
 
 int main()
 {
-
     // Inicialização de semáforos e barreiras.
     pthread_barrier_init(&barrier, NULL, 4);
     sem_init(&mutex, 0, 1);
