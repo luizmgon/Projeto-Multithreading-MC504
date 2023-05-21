@@ -44,12 +44,96 @@ make
 
 Caso o sistema retorne um erro de acesso não permitido, faça `chmod +rwe ./exe`
 
+Os arquivos binários gerados encontram-se no `.gitignore`, para que cada usuário faça sua compilação em seu ambiente de desenvolvimento. 
+
 ## Implementação
-_explicar detalhes importantes da implementação dos semáfaros, decisões feitas, duas versões, etc_
+
+### Definições globais
+As variáveis `N_HACKERS`  e `N_SERFS` definem quantos Hacker e Serfs chegarão à margem até o final da execução do problema. Sendo o número de vagas que o barco exige para atravessar o rio (`N_VAGAS`) e a porcentagem mínima de cada tipo de pessoa no barco (`N_PORCENTAGEM_MÍNIMA`) podem ser alterados para o caso da versão genérica do problema (`river_crossing_generic.c`). Na versão original, `river_crossing_problem.c`, somente a quantidade de hacker e serfs podem ser alteradas. 
+
+Portanto, a versão final implementada é `river_crossing_generic.c`, uma vez que ela pode ser configurada para conter o caso original descrito em `river_crossing_problem.c`
+
+### Uso dos semáfaros
+
+Para a implementação das funcionalidades das threads, criamos os semáfaros:
+
+```C
+pthread_barrier_t barrier;
+sem_t mutex;
+sem_t serf_queue;
+sem_t hacker_queue;
+```
+
+#### barrier
+
+Espera até que o número `N_VAGAS` de threads estejam prontas para partir, ou seja, para que o capitão execute a função de remar. 
+
+#### mutex
+
+Controla as threads sassim que são criadas e passam a executar a respectiva função passada para `pthread_create`. Assim, uma thread por vez pode chegar à margem. 
+
+#### queue
+
+Controla a fila de pessoas que estão esperando para entrar no barco. Cada thread, antes de embarcar, espera esse semáfaro para chegar à função de embarque. 
+
+
+### Funcionamento Geral do Código
+
+A função `pthread_barrier_init` é inicializada com o valor de barreira igual ao número máximo de pessoas no barco. 
+
+Os semáfaros são inicializados e dois vetores de threads (uma para serfs e outra para hackers) são criados. 
+
+Para estabelecer uma aleatoriadade para o intervalo e o tipo de pessoa que chega à margem, as threads são criadas seguindo um padrão aleatório e com valores de `sleep` também aleatórios, simulando uma chegada diferente a cada execução. Elas são declaradas e inicializadas até que as quantidades `N_HACKERS`  e `N_SERFS` sejam atingidas.
+
+As funções executadas por cada thread são:
+
+```C
+void *thread_hackers();
+void *thread_serfs();
+```
+Elas apresentam implementações espelhadas. Por isso, explicamos com pseudocódigo uma versão genérica que funciona para as duas: 
+
+```C
+void *thread_hackers(){
+    waitMutex();
+    newHackerArrived();
+    if("existe condições de embarque"){
+        for("cada pessoa esperando para embarcar"){
+            semPostQueue();
+        }
+    }
+    else {
+        semPostMutex();
+    }
+    waitFila();
+    board();
+    waitBarrier();
+
+    if("é capitão"){
+        rowBoat();
+        semPostMutex();
+    }
+}
+
+```
+
+Assim, cada vez que um thread é criada, ela espera o mutex para chegar no porto.
+    - Se há condições para embarcar, ou seja, o número e a configurações de pessoas esperando para embarcar é compatível com o embarque, as pessoas que estão o semáfaro para embarcar são liberadas.
+    - Senão, o mutex é liberado para que outras pessoas cheguem ao porto
+Após isso, a thread que chegou espera o semáfaro de fila liberar para que ela embarque. Após isso, esperamos a barreira atingir o número de vagas do barco para liberar a partida do barco, que ocorrer quando o capitão rema.  
 
 ## Representação Gráfica
 
-_completar com alguns prints e descrições da representação gráfica do problema_
+A implementação é feita no arquivo `river_image.c`. Usamos "prints" para imprimir linha a linha o estado global da aplicação.
+
+Para limpara o console e dar efeito de animação, bem como colorir a imagem, a biblioteca `ncurses` foi usada. 
+
+A versão gráfica é disponível somente para o arquivo `river_crossing_generic.c`. 
+
+Abaixo mostramos alguns exemplos da representação para diferentes configurações do problema. 
+
+_colocar prints_
+
 
 
 
