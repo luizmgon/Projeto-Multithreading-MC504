@@ -132,7 +132,25 @@ A versão gráfica é disponível somente para o arquivo `river_crossing_generic
 
 Abaixo mostramos alguns exemplos da representação para diferentes configurações do problema. 
 
-_colocar prints_
+![Captura de tela de 2023-05-21 16-58-57](https://github.com/luizmgon/Projeto-Multithreading-MC504/assets/80909346/0d18b906-b050-47ee-9210-524240e00cfa)
+_Pessoa esperando enquanto não foram satisfeitas as condições de embarque_
+
+![Captura de tela de 2023-05-21 17-10-52](https://github.com/luizmgon/Projeto-Multithreading-MC504/assets/80909346/950d2921-ab66-43e1-b031-a866f6bda58d)
+_Pessoas embarcando quando foram satisfeitas as condições_
+
+![Captura de tela de 2023-05-21 16-58-49](https://github.com/luizmgon/Projeto-Multithreading-MC504/assets/80909346/7c36656b-6f4b-4af1-92ad-732c119b7cdc)
+_Barquinho navegando até a outra margem_
+
+![Captura de tela de 2023-05-21 16-58-52](https://github.com/luizmgon/Projeto-Multithreading-MC504/assets/80909346/36e09110-ea53-44d6-9608-d61cf1ab42af)
+_Barquinho chegando até a outra margem e deixando os passageiros_
+
+![Captura de tela de 2023-05-21 17-15-42](https://github.com/luizmgon/Projeto-Multithreading-MC504/assets/80909346/5ee252b8-f3e9-4586-9369-8811098bb1e4)
+_Exemplo de execução variando os parâmetros_
+
+
+
+
+
 
 
 
